@@ -1,0 +1,166 @@
+module: unittest
+class name: TestCase
+instance method: 3 method	- Override
+1. setUp()
+2. test()	to test -setup? browser open, database open? pre requisite activity??
+3. tearDown()	once testing completed, clean the environment you created for testing.
+class metho: 2
+1. setUpClass()
+2. tearDownClass()
+
+every test method execution, setup will be executed before executing test(), and after completing tearDown() will be execute
+
+
+2 test method:
+setUp(): open chrome browser
+test1 - check login in google chrome
+tearDown(): close chrome
+
+setUp(): open firefor
+test2 - check login in firefox browser
+tearDown(): close firefox
+
+TestSuite:
+-----------
+Group of test case
+testcase1.py
+testcase2.py
+
+how to execute?
+import unittest
+from testcase1 import *
+from testcase2 import *
+#load all the test case from testcase1 and testcase2
+tc1 = unittest.TestLoader().loadTestsFromTestCase(testcase1)
+tc2 = unittest.TestLoader().loadTestsfromTestCase(testcase2)
+
+#create a testsuite
+ts = unittest.TestSuite([tc1,tc2])
+unittest.TextTestRunner().run(ts)
+
+
+Requirement:
+test1 - check login in chrome with valid credentials
+test2 - check login in chrome with invalid credentials
+- same browser
+define special method, that will be executed
+setUpClass(cls):	--> class level method, only executed once
+
+tearDownClass(cls): --> executed once after setUpClass(cls) method
+
+Case:if 10 test method:
+setUp(): --> 10 times 
+tearDown(): --> 10 times
+setUpClass() -> 1 time
+tearDownClass() --> 1 time
+
+Selenium Demo: HMS: (without setUp() and tearDown())
+#Testing login and logout functionality of HMS application:
+#test_login() - same browser, setUpClass(): to launch browser
+#test_logout() - same browser, setUpClass(): to launch browser
+#tearDownClass()- to close the browser
+website: seleniumbymahesh.com - admin/admin
+
+****************2nd Video****************
+selenium: fucntional testing automation tool
+install selenium library
+selenium: package
+it contains-
+webdriver: module(contains classes and functions) to test functionality of the web application
+
+Launch browser:
+---------------
+Browser driver must be required to lauch our broswer
+
+**********Browser Interaction And Navigation Of WebPages**********
+1. driver.ger(url)
+	-to open specified url
+2. driver.maximize_window()
+	-to maximize window
+3. driver.title
+	-to know title
+4. driver.current_url
+	-to know the current url
+5. driver.refresh()
+	-to refresh the current webpage
+   OR
+   driver.get(driver.current_url)
+6. driver.back()
+	-goes one step backword in the browser history
+7. driver.forward()
+	-goes one step forward in the browser history
+8. driver.close()
+	-to close current window
+9. driver.quit()
+	-to close the browser instance
+
+
+****How to locate web elements*****
+------------------------------------
+driver.find_element_by_id('id')
+driver.find_element_by_name('name')
+driver.find_element_by_xpath('xpath')
+driver.find_element_by_css_selector('css')
+driver.find_element_by_link_text('text') #anchor tag
+
+OR
+
+#import this before using it
+from selenium.webdriver.common.by import By
+
+driver.find_element(By.ID,'id')
+driver.find_element(By.NAME,'name')
+driver.find_element(By.LINK_TEXT,'txt')
+driver.find_element(By.CSS_SELECTOR,'css')
+driver.find_element(By.XPATH,'xpath')
+
+******Limitations of unittest***********
+----------------------------------------
+- Always executed in alphbatical order.
+
+import unittest
+class TestCaseDemo(unittest.TestCase):
+ def test_C(self):
+  print("test C execution...")
+
+ def test_B(self):
+  print("test B execution...")
+
+ def test_A(self):
+  print("test A execution...")
+
+unittest.main()
+
+Execution order: A...B... and the C.
+output displayed in console.
+
+1. Test results will be displayed on the console only
+and it is not possible to generate reports.
+-----------------------------------------------------
+2. unittest framework always execute test methods 
+in alphabetical order only.
+And it is not possible customize execution order
+-----------------------------------------------------
+3. As the part of batch execution(TestSuite), all the test
+methods from the specified TestCase classes will be
+executed and it is not possible to specify particular method
+to execute.
+-----------------------------------------------------
+4. In unittesting only limited setUp and tearDown methods are available
+   setUpClass()---> before execution all test methods of TestCase class
+   tearDownClass()---> After executing all test methods of TestCase class
+   setUp()---> Before every test method executed
+   tearDown()---> After every test method executed
+
+if we want to perform any activity before and after exeuting testSuite,
+unittest does not define any method.
+
+How to OverCome these limitations?
+***************PyTest*******************
+
+
+
+
+
+
+
